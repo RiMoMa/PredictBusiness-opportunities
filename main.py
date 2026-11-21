@@ -10,8 +10,8 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import confusion_matrix
 NFeats=10
 ### Load Data
-DataTrain = pd.read_csv('BD/oportunidad.csv')
-DataTest = pd.read_excel('BD/NewOpportunitiesList.xlsx')
+DataTrain = pd.read_csv('BD/oportunidad.csv', keep_default_na=False, na_values=[''])  # 'None' es una categoría de Competitor Type, no un NaN
+DataTest = pd.read_excel('BD/NewOpportunitiesList.xlsx', keep_default_na=False, na_values=[''])
 CountryList = pd.read_excel('BD/Countries.xlsx')
 CountryList = CountryList.set_index('ID')
 ###########
@@ -291,7 +291,7 @@ print('Results Fscore')
 sns.heatmap(Results_df_Fs.astype(np.float64), annot=True,fmt=".2f")
 plt.show()
 ax = plt.axes()
-sns.heatmap(Results_df_Fs, ax = ax)
+sns.heatmap(Results_df_Fs.astype(np.float64), ax = ax)
 ax.set_title('Fscore')
 plt.show()
 
