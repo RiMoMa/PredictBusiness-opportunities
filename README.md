@@ -6,12 +6,31 @@ países**: en vez de un único modelo global o un modelo aislado por país, se e
 país con los países cuyo proceso de decisión se parece al suyo.
 
 ## Datos (`BD/`)
-- `oportunidad.csv`: 31.823 oportunidades históricas (7.246 ganadas, 24.577 perdidas; 77 % perdidas).
-  Variables: subgrupo y grupo de producto, número de cambios de etapa, días hasta el cierre y hasta la
-  calificación, monto en USD, tamaño del cliente (ingresos y empleados), ingresos del cliente en
-  los últimos dos años, tipo de competidor, categoría de tamaño del trato, coordenadas y país.
-- `NewOpportunitiesList.xlsx`: lista "nueva" sin etiqueta, con las mismas variables.
-- `Countries.xlsx`: tabla de códigos de país.
+Registros de oportunidades de venta de una empresa de accesorios y repuestos de automóvil, con el
+resultado final de cada una (ganada o perdida). El repositorio no documenta el origen del conjunto
+de datos.
+
+**`oportunidad.csv`** (entrenamiento): 31.823 oportunidades, 16 columnas, 7 países.
+- **Resultado** (`Opportunity Result`): 7.246 ganadas (23 %) y 24.577 perdidas (77 %).
+- **Producto:** `Supplies Group` (4 grupos: Car Accessories 20.294, Performance & Non-auto 11.168,
+  Tires & Wheels 241, Car Electronics 120) y `Supplies Subgroup` (11 subgrupos).
+- **Proceso de venta:** `Sales Stage Change Count` (cambios de etapa, de 1 a 20, mediana 3),
+  `Total Days Identified Through Closing` (días hasta el cierre, de 0 a 192, mediana 12) y
+  `Total Days Identified Through Qualified` (días hasta la calificación).
+- **Valor:** `Opportunity Amount USD` (de 0 a 1.000.000, mediana 49.418) y `Deal Size Category`
+  (7 categorías).
+- **Cliente:** `Client Size By Revenue` y `Client Size By Employee Count` (escala 1-5; el 76 % está en
+  la categoría 1) y `Revenue From Client Past Two Years` (escala 0-4; la mayoría es 0).
+- **Competencia:** `Competitor Type` (Unknown 23.119, Known 4.925, None 3.779).
+- **Ubicación:** `Lat`, `Lon` y `Country_Code`. Oportunidades por país: Perú 8.569, Chile 6.197,
+  Brasil 3.885, Ecuador 3.765, Bolivia 3.298, Venezuela 3.123 y Colombia 2.986.
+- `Opportunity Number` es el identificador; 308 filas no lo tienen y no se usa como variable.
+
+**`NewOpportunitiesList.xlsx`:** 31.823 oportunidades con las mismas variables, sin `Opportunity Result`,
+más las columnas `Country` e `ID`. Ver limitaciones.
+
+**`Countries.xlsx`:** tabla de 9 países (`Country`, `ID`). Francia y Alemania no tienen oportunidades
+en `oportunidad.csv`.
 
 ## Método (`main.py`)
 1. Codificación de variables categóricas y estandarización (dentro de cada fold).
